@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../../../public/images/Logo.png';
+import logo from '/images/Logo.png';
 
 export const SigninRoute = () => {
 	return (
