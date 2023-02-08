@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-export const RootRoute = () => {
+const RootAuth = () => {
 	return (
-		<div id='root-page'>
+		<div>
 			<Outlet />
 		</div>
 	);
 };
 
-export default RootRoute;
+export default RootAuth;
