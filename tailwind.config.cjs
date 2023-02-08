@@ -1,3 +1,7 @@
+const maxWidth = {
+	authForms: '380px',
+};
+
 module.exports = {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
@@ -63,6 +67,7 @@ module.exports = {
 			borderWidth: {
 				1: '1px',
 			},
+			maxWidth,
 		},
 	},
 	plugins: [],

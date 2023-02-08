@@ -4,7 +4,7 @@ import { Button, InputField } from '../../components';
 
 export const ForgotPasswordRoute = () => {
 	return (
-		<div id='forgot-password-page'>
+		<div id='forgot-password-page' className='md:max-w-authForms'>
 			<form
 				action='/auth/forgot-password'
 				className='rounded-lg bg-white px-8 pt-10 pb-6'

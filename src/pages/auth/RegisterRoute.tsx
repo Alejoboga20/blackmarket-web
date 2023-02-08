@@ -4,7 +4,7 @@ import { Button, InputField } from '../../components';
 
 export const RegisterRoute = () => {
 	return (
-		<div id='register-page'>
+		<div id='register-page' className='md:max-w-authForms'>
 			<form action='/auth/signin' className='rounded-lg bg-white px-8 pb-6 pt-10' noValidate>
 				<div className='flex w-full justify-center'>
 					<img src={logo} alt='blackmarket' />
