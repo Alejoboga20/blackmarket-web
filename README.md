@@ -23,3 +23,5 @@ $ yarn dev
 ```
 
 - Open localhost in your browser using the port indicated as the output of the console
+
+![app overview](/public/images/Preview.png)
