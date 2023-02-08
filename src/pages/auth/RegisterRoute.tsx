@@ -1,33 +1,38 @@
 import { Link } from 'react-router-dom';
 import logo from '/images/Logo.png';
+import { Button, InputField } from '../../components';
 
 export const RegisterRoute = () => {
 	return (
 		<div id='register-page'>
-			<form action='/auth/signin' className='bg-white rounded-lg pt-10 px-4' noValidate>
-				<div className='w-full flex justify-center'>
+			<form action='/auth/signin' className='rounded-lg bg-white px-8 pb-6 pt-10' noValidate>
+				<div className='flex w-full justify-center'>
 					<img src={logo} alt='blackmarket' />
 				</div>
 
-				<div className='flex flex-col mt-9'>
-					<label htmlFor='email'>Email</label>
-					<input type='email' id='email' formNoValidate />
+				<div className='mt-9 flex flex-col'>
+					<InputField label='Email' name='email' isRequired type='email' />
+					<InputField label='FullName' name='fullname' isRequired type='text' />
+					<InputField label='Password' name='password' isRequired type='password' />
 
-					<label htmlFor='fullname'>Full Name</label>
-					<input type='text' id='fullname' formNoValidate />
+					<Button
+						className='mt-4'
+						label='Sign up'
+						type='submit'
+						variant='primary'
+						onClick={() => console.log('login')}
+						fullWidth
+					/>
 
-					<label htmlFor='password'>Password</label>
-					<input type='password' id='password' formNoValidate />
-
-					<button name='signup' type='submit'>
-						Sign up
-					</button>
-					<Link to='forgot-password' className='text-center'>
+					<p className='mt-4 text-center'>
 						By signing up, you accept the Data Policy and the Cookies Policy.
-					</Link>
+					</p>
 
-					<p>
-						Already have an account? <Link to='/auth'>Log in</Link>{' '}
+					<p className='mt-4 text-center'>
+						Already have an account?{' '}
+						<Link to='/auth' className='text-blue-500'>
+							Log in
+						</Link>{' '}
 					</p>
 				</div>
 			</form>

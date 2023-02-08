@@ -5,12 +5,12 @@ import { Button, InputField } from '../../components';
 export const SigninRoute = () => {
 	return (
 		<div id='signin-page'>
-			<form action='/auth/signin' className='bg-white rounded-lg pt-10 pb-6 px-8' noValidate>
-				<div className='w-full flex justify-center'>
+			<form action='/auth/signin' className='rounded-lg bg-white px-8 pt-10 pb-6' noValidate>
+				<div className='flex w-full justify-center'>
 					<img src={logo} alt='blackmarket' />
 				</div>
 
-				<div className='flex flex-col mt-8'>
+				<div className='mt-8 flex flex-col'>
 					<InputField label='Email' name='email' isRequired type='email' />
 					<InputField label='Password' name='password' isRequired type='password' />
 					<Button
@@ -27,7 +27,7 @@ export const SigninRoute = () => {
 				</div>
 			</form>
 
-			<div className='bg-white rounded-lg py-5 px-8 mt-4 text-center '>
+			<div className='mt-4 rounded-lg bg-white py-5 px-8 text-center '>
 				<p>Don't have an account?</p>
 				<Link to='register'>
 					<Button
