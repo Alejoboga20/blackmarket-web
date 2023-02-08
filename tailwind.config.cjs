@@ -5,6 +5,9 @@ module.exports = {
 			fontFamily: {
 				sans: ['DM Sans', 'sans-serif'],
 			},
+			backgroundImage: {
+				'auth-background': "url('/images/AuthBackground.png')",
+			},
 			colors: {
 				white: '#FFFFFF',
 				black: '#00031A',
