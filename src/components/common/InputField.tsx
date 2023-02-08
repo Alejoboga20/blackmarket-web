@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import cn from 'classnames';
 
 import crossError from '/icons/cross-error.svg';
@@ -14,6 +15,7 @@ export const InputField = ({
 	disabled = false,
 	type = 'text',
 	error = '',
+	register,
 }: InputFieldProps) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -38,7 +40,6 @@ export const InputField = ({
 					disabled={disabled}
 					required={isRequired}
 					placeholder={placeholder}
-					name={name}
 					defaultValue={defaultValue}
 					autoComplete='on'
 					formNoValidate
@@ -46,6 +47,7 @@ export const InputField = ({
 						'mt-1 h-12 w-full rounded-lg border-1 border-solid border-black p-3 text-black focus:outline-none',
 						{ 'border-red-600': error }
 					)}
+					{...register(name)}
 				/>
 			</div>
 
@@ -66,4 +68,5 @@ interface InputFieldProps {
 	disabled?: boolean;
 	error?: string;
 	type?: 'text' | 'password' | 'email' | 'file' | 'date';
+	register: UseFormRegister<any>;
 }
