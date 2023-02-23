@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import cn from 'classnames';
 
@@ -11,7 +11,7 @@ export const InputField = ({
 	defaultValue = '',
 	label = '',
 	placeholder = '',
-	isRequired = false,
+	required = false,
 	disabled = false,
 	type = 'text',
 	error = '',
@@ -22,7 +22,7 @@ export const InputField = ({
 	return (
 		<div className='mt-4 flex flex-col'>
 			<label htmlFor={label} className={cn('block', { hidden: !label })}>
-				{label} {isRequired && '*'}
+				{label} {required && '*'}
 			</label>
 
 			<div className='relative'>
@@ -38,7 +38,7 @@ export const InputField = ({
 					id={label}
 					type={isPasswordVisible ? 'text' : type}
 					disabled={disabled}
-					required={isRequired}
+					required={required}
 					placeholder={placeholder}
 					defaultValue={defaultValue}
 					autoComplete='on'
@@ -59,14 +59,9 @@ export const InputField = ({
 	);
 };
 
-interface InputFieldProps {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 	name: string;
 	label?: string;
-	defaultValue?: string;
-	placeholder?: string;
-	isRequired?: boolean;
-	disabled?: boolean;
 	error?: string;
-	type?: 'text' | 'password' | 'email' | 'file' | 'date';
 	register: UseFormRegister<any>;
 }

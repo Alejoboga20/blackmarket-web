@@ -51,7 +51,7 @@ export const ForgotPasswordRoute = () => {
 					<InputField
 						label='Email'
 						name={FormFields.email}
-						isRequired
+						required
 						type='email'
 						register={register}
 					/>
