@@ -16,6 +16,8 @@ $ git clone https://github.com/Alejoboga20/blackmarket-web.git
 $ yarn install
 ```
 
+- Create `.env` file with the information provided in `.env.example` and add your config variables.
+
 - Start dev server
 
 ```bash
