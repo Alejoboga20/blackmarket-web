@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { AuthContext } from '../../context/auth/AuthContext';
 import { Button, InputField } from '../../components';
 import logo from '/images/Logo.png';
+
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 enum FormFields {
 	email = 'email',
@@ -20,27 +24,32 @@ type FormData = {
 
 const schema = yup.object({
 	[FormFields.email]: yup.string().email().required(),
-	[FormFields.fullname]: yup.string().min(3).required(),
-	[FormFields.password]: yup.string().min(6).required(),
+	[FormFields.fullname]: yup.string().min(3),
+	[FormFields.password]: yup
+		.string()
+		.matches(
+			PASSWORD_REGEX,
+			'Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, one symbol and one number'
+		)
+		.required(),
 });
 
 export const RegisterRoute = () => {
+	const { user, error, signUp } = useContext(AuthContext);
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
 	} = useForm<FormData>({ mode: 'onTouched', resolver: yupResolver(schema) });
 
-	const onSubmit: SubmitHandler<FormData> = (data) => {
-		console.log({ data });
-	};
+	const onSubmit: SubmitHandler<FormData> = async ({ email, password, fullname }) =>
+		signUp(email, password, fullname);
 
 	const isSignupButtonDisabled = !!(errors.email || errors.password || errors.fullname);
 
 	return (
 		<div id='register-page' className='md:max-w-authForms'>
 			<form
-				action='/auth/signin'
 				className='rounded-lg bg-white px-8 pb-6 pt-10'
 				onSubmit={handleSubmit(onSubmit)}
 				noValidate
@@ -53,15 +62,15 @@ export const RegisterRoute = () => {
 					<InputField
 						label='Email'
 						name={FormFields.email}
-						isRequired
+						required
 						type='email'
 						error={errors.email?.message}
 						register={register}
 					/>
 					<InputField
-						label='FullName'
+						label='Fullname'
 						name={FormFields.fullname}
-						isRequired
+						required
 						type='text'
 						error={errors.fullname?.message}
 						register={register}
@@ -69,7 +78,7 @@ export const RegisterRoute = () => {
 					<InputField
 						label='Password'
 						name={FormFields.password}
-						isRequired
+						required
 						type='password'
 						error={errors.password?.message}
 						register={register}
