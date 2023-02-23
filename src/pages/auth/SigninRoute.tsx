@@ -1,10 +1,12 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import logo from '/images/Logo.png';
+import { AuthContext } from '../../context';
 import { Button, InputField } from '../../components';
+import logo from '/images/Logo.png';
 
 enum FormFields {
 	email = 'email',
@@ -22,22 +24,20 @@ const schema = yup.object({
 });
 
 export const SigninRoute = () => {
+	const { user, error, signIn } = useContext(AuthContext);
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
 	} = useForm<FormData>({ mode: 'onTouched', resolver: yupResolver(schema) });
 
-	const onSubmit: SubmitHandler<FormData> = (data) => {
-		console.log({ data });
-	};
+	const onSubmit: SubmitHandler<FormData> = ({ email, password }) => signIn(email, password);
 
 	const isLoginButtonDisabled = !!(errors.email || errors.password);
 
 	return (
 		<div id='signin-page' className='md:max-w-authForms'>
 			<form
-				action='/auth/signin'
 				className='rounded-lg bg-white px-8 pt-10 pb-6'
 				onSubmit={handleSubmit(onSubmit)}
 				noValidate
@@ -50,7 +50,7 @@ export const SigninRoute = () => {
 					<InputField
 						label='Email'
 						name={FormFields.email}
-						isRequired
+						required
 						type='email'
 						register={register}
 						error={errors.email?.message}
@@ -61,7 +61,7 @@ export const SigninRoute = () => {
 						type='password'
 						register={register}
 						error={errors.password?.message}
-						isRequired
+						required
 					/>
 					<Button
 						className='mt-4'
